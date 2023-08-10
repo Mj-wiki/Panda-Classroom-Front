@@ -16,13 +16,11 @@ import style from './index.module.less';
 interface IProps {
   id: string;
   onClose: (isReload?: boolean) => void;
-  open: boolean;
 }
 /**
 * 可约时间
 */
 const OrderTime = ({
-  open,
   onClose,
   id,
 }: IProps) => {
@@ -45,7 +43,7 @@ const OrderTime = ({
     <Drawer
       title="编辑预约时间"
       width={720}
-      open={open}
+      open
       onClose={() => onClose()}
       forceRender
     >
