@@ -1,9 +1,10 @@
 import './App.css';
+import Login from './containers/Login';
 
 function App() {
   console.log('ss');
   return (
-    <div className="App" />
+    <Login />
   );
 }
 
