@@ -1,11 +1,6 @@
+import { CARD_TYPE } from '@/utils/constants';
 import { ProColumns } from '@ant-design/pro-components';
 import { Popconfirm, Space } from 'antd';
-
-// 卡类型
-const CARD_TYPE = {
-  TIME: 'time', // 次卡
-  DURATION: 'duration', // 时长卡
-};
 
 export const getColumns = (onDeleteHandler: Function): ProColumns[] => [
   {

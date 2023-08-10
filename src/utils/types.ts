@@ -97,6 +97,7 @@ export interface ICard {
   type: string;
   time: number;
   validityDay: number;
+  course: ICourse;
 }
 
 export type TCardsQuery = { [key: string]: { __typename?: 'Query', data: ICard[], page: IPage } };
@@ -114,6 +115,7 @@ export interface IProduct {
   originalPrice: number;
   stock: number;
   preferentialPrice: number;
+  cards: ICard[];
 }
 
 export type TProductsQuery = { [key: string]: { __typename?: 'Query', data: IProduct[], page: IPage } };

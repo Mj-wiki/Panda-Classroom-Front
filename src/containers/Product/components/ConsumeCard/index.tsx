@@ -1,8 +1,15 @@
-import { Drawer } from 'antd';
-import { EditableProTable } from '@ant-design/pro-components';
-import { ICard } from '@/utils/types';
-import { useCards, useDeleteCard, useEditCardInfo } from '@/services/card';
-import { getColumns } from './constants';
+import {
+  Modal, Result, Row, Space, Typography,
+} from 'antd';
+import { CheckCard } from '@ant-design/pro-components';
+import { useLazyCards } from '@/services/card';
+import { useEffect, useMemo, useState } from 'react';
+import { useEditProductInfo, useProductInfo } from '@/services/product';
+import CourseSearch from '@/components/CourseSearch';
+import { getCardName } from '@/utils/constants';
+import _ from 'lodash';
+import { CreditCardOutlined } from '@ant-design/icons';
+import style from './index.module.less';
 
 interface IProps {
   id: string;
@@ -16,53 +23,102 @@ const ConsumeCard = ({
   onClose,
   id,
 }: IProps) => {
-  const { data, loading, refetch } = useCards(id);
-  const [del, delLoading] = useDeleteCard();
-  const [edit, editLoading] = useEditCardInfo();
+  const [selectedCards, setSelectedCards] = useState<string[]>([]);
+  const { data: product, loading: getProductLoading } = useProductInfo(id);
+  const { getCards, data: cards, loading: getCardsLoading } = useLazyCards();
+  const [edit, editLoading] = useEditProductInfo();
 
-  const onDeleteHandler = (key: string) => {
-    del(key, refetch);
+  const newCards = useMemo(
+    () => _.unionBy(product?.cards || [], cards, 'id'),
+    [cards, product?.cards],
+  );
+
+  useEffect(() => {
+    setSelectedCards(product?.cards?.map((item) => item.id) || []);
+  }, [product?.cards]);
+
+  const onOkHandler = () => {
+    edit(id, {
+      cards: selectedCards,
+    }, () => onClose());
   };
-  const onSaveHandler = (d: ICard) => {
-    edit(d.id, id, {
-      name: d.name,
-      type: d.type,
-      time: d.time,
-      validityDay: d.validityDay,
-    }, refetch);
+
+  const onSelectedHandler = (courseId: string) => {
+    getCards(courseId);
   };
+
   return (
-    <Drawer
-      title="关联消费卡"
-      width="90vw"
+    <Modal
+      title="绑定消费卡"
+      width="900"
       open
-      onClose={() => onClose()}
+      onOk={onOkHandler}
+      onCancel={() => onClose()}
     >
-      <EditableProTable<ICard>
-        headerTitle="请管理该课程的消费卡"
-        rowKey="id"
-        loading={loading || editLoading || delLoading}
-        recordCreatorProps={{
-          record: () => ({
-            id: 'new',
-            name: '',
-            type: 'time',
-            time: 0,
-            validityDay: 0,
-          }),
-        }}
-        value={data}
-        columns={getColumns(onDeleteHandler)}
-        editable={{
-          onSave: async (rowKey, d) => {
-            onSaveHandler(d);
-          },
-          onDelete: async (key) => {
-            onDeleteHandler(key as string);
-          },
-        }}
-      />
-    </Drawer>
+      <Row justify="end">
+        <CourseSearch onSelected={onSelectedHandler} />
+      </Row>
+      <Row justify="center" className={style.content}>
+        {newCards.length === 0 && (
+        <Result
+          status="warning"
+          title="请搜索课程并选择对应的消费卡"
+        />
+        )}
+        <CheckCard.Group
+          multiple
+          loading={getProductLoading || editLoading || getCardsLoading}
+          onChange={(value) => {
+            setSelectedCards(value as string[]);
+          }}
+          value={selectedCards}
+        >
+          {
+            newCards.map((item) => (
+              <CheckCard
+                key={item.id}
+                value={item.id}
+                size="small"
+                avatar={<CreditCardOutlined />}
+                title={
+                  (
+                    <>
+                      <Space>
+                        <Typography.Text
+                          ellipsis
+                          className={style.name}
+                        >
+                          {item.course?.name}
+                        </Typography.Text>
+                        {getCardName(item.type)}
+                      </Space>
+                      <div>
+                        {item.name}
+                      </div>
+                    </>
+                  )
+                }
+                description={
+                  (
+                    <Space>
+                      <span>
+                        次数：
+                        {item.time}
+                      </span>
+                      <span>
+                        有效期：
+                        {item.validityDay}
+                      </span>
+                    </Space>
+                  )
+                }
+              />
+            ))
+          }
+
+        </CheckCard.Group>
+      </Row>
+    </Modal>
   );
 };
 

@@ -26,7 +26,7 @@ export const GET_PRODUCTS = gql`
 `;
 
 export const COMMIT_PRODUCT = gql`
-  mutation commitProductInfo($params: ProductInput!, $id: String) {
+  mutation commitProductInfo($params: PartialProductInput!, $id: String) {
     commitProductInfo(params: $params, id: $id) {
       code
       message
@@ -49,6 +49,17 @@ export const GET_PRODUCT = gql`
         originalPrice
         stock
         preferentialPrice
+        cards {
+          id
+          name
+          type
+          time
+          validityDay
+          course {
+            name
+            id
+          }
+        }
       }
     }
   }

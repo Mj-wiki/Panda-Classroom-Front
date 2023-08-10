@@ -51,6 +51,28 @@ export const useCourses = (
   };
 };
 
+export const useCoursesForSample = () => {
+  const [get, { data, loading }] = useLazyQuery<TCoursesQuery>(GET_COURSES);
+
+  const searchHandler = (name: string) => {
+    get({
+      variables: {
+        name,
+        page: {
+          pageNum: 1,
+          pageSize: DEFAULT_PAGE_SIZE,
+        },
+      },
+    });
+  };
+
+  return {
+    loading,
+    data: data?.getCourses.data,
+    search: searchHandler,
+  };
+};
+
 export const useEditCourseInfo = (): [handleEdit: Function, loading: boolean] => {
   const [edit, { loading }] = useMutation(COMMIT_COURSE);
 

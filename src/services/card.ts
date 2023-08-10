@@ -1,7 +1,7 @@
 import { ICard } from '@/utils/types';
 import { COMMIT_CARD, DELETE_CARD, GET_CARDS } from '@/graphql/card';
 import { message } from 'antd';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
 
 export const useCards = (courseId: string) => {
   const { data, loading, refetch } = useQuery(GET_CARDS, {
@@ -14,6 +14,24 @@ export const useCards = (courseId: string) => {
     loading,
     data: data?.getCards.data,
     refetch,
+  };
+};
+
+export const useLazyCards = () => {
+  const [get, { data, loading }] = useLazyQuery(GET_CARDS);
+
+  const getCards = (courseId: string) => {
+    get({
+      variables: {
+        courseId,
+      },
+    });
+  };
+
+  return {
+    loading,
+    data: data?.getCards.data,
+    getCards,
   };
 };
 
