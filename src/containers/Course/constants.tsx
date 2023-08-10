@@ -2,7 +2,15 @@ import { ICourse } from '@/utils/types';
 import { ProColumns } from '@ant-design/pro-components';
 import { Button } from 'antd';
 
-export const COLUMNS: ProColumns<ICourse, 'text'>[] = [
+interface IProps {
+  onEditHandler: (id: string) => void
+}
+
+export const getColumns: ({
+  onEditHandler,
+}: IProps) => ProColumns<ICourse, 'text'>[] = ({
+  onEditHandler,
+}) => [
   {
     title: '课程标题',
     dataIndex: 'name',
@@ -24,12 +32,13 @@ export const COLUMNS: ProColumns<ICourse, 'text'>[] = [
     title: '操作',
     valueType: 'option',
     dataIndex: 'id',
-    render: (text) => (
+    width: 100,
+    render: (text, entity) => (
       <Button
         type="link"
+        onClick={() => onEditHandler(entity.id)}
       >
         编辑
-        {text}
       </Button>
     ),
   },

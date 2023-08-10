@@ -71,4 +71,8 @@ export interface ICourse {
   otherInfo?: string;
 }
 
-export type TCourseQuery = { [key: string]: { __typename?: 'Query', data: ICourse[], page: IPage } };
+export type TCoursesQuery = { [key: string]: { __typename?: 'Query', data: ICourse[], page: IPage } };
+
+export type TCourseQuery = { [key: string]: { __typename?: 'Query', data: ICourse, page: IPage } };
+
+export type TBaseCourse = Partial<ICourse>;
