@@ -1,5 +1,5 @@
 import { ActionType, PageContainer, ProTable } from '@ant-design/pro-components';
-import { useDeleteProduct, useProducts } from '@/services/product';
+import { useDeleteProduct, useEditProductInfo, useProducts } from '@/services/product';
 import { IProduct } from '@/utils/types';
 import { DEFAULT_PAGE_SIZE } from '@/utils/constants';
 import { Button } from 'antd';
@@ -17,6 +17,7 @@ const Product = () => {
   const [curId, setCurId] = useState('');
   const { refetch, loading } = useProducts();
   const [delHandler, delLoading] = useDeleteProduct();
+  const [edit, editLoading] = useEditProductInfo();
   const [showInfo, setShowInfo] = useState(false);
   const [showCard, setShowCard] = useState(false);
 
@@ -45,19 +46,26 @@ const Product = () => {
     delHandler(id, () => actionRef.current?.reload());
   };
 
+  const onStatusChangeHandler = (id: string, status: string) => {
+    edit(id, {
+      status,
+    }, () => actionRef.current?.reload());
+  };
+
   return (
-    <PageContainer header={{ title: '当前门店下开设的课程' }}>
+    <PageContainer header={{ title: '当前门店下的商品' }}>
       <ProTable<IProduct>
         rowKey="id"
         form={{
           ignoreRules: false,
         }}
-        loading={delLoading || loading}
+        loading={delLoading || editLoading || loading}
         actionRef={actionRef}
         columns={getColumns({
           onEditHandler: onClickAddHandler,
           onCardHandler,
           onDeleteHandler,
+          onStatusChangeHandler,
         })}
         pagination={{
           pageSize: DEFAULT_PAGE_SIZE,

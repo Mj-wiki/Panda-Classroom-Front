@@ -5,19 +5,22 @@ import {
 } from 'antd';
 
 interface IProps {
-  onEditHandler: (id: string) => void
-  onCardHandler: (id: string) => void
-  onDeleteHandler: (id: string) => void
+  onEditHandler: (id: string) => void;
+  onCardHandler: (id: string) => void;
+  onDeleteHandler: (id: string) => void;
+  onStatusChangeHandler: (id: string, status: string) => void;
 }
 
-export const getColumns: ({
+const PRODUCT_STATUS = {
+  LIST: 'LIST',
+  UN_LIST: 'UN_LIST',
+};
+
+export const getColumns: (props: IProps) => ProColumns<IProduct, 'text'>[] = ({
   onEditHandler,
   onCardHandler,
   onDeleteHandler,
-}: IProps) => ProColumns<IProduct, 'text'>[] = ({
-  onEditHandler,
-  onCardHandler,
-  onDeleteHandler,
+  onStatusChangeHandler,
 }) => [
   {
     dataIndex: 'id',
@@ -97,6 +100,29 @@ export const getColumns: ({
     width: 200,
     render: (text, entity) => (
       <Space>
+        {entity.status === PRODUCT_STATUS.UN_LIST
+          ? (
+            <a
+              key="list"
+              style={{
+                color: 'blue',
+              }}
+              onClick={() => onStatusChangeHandler(entity.id, PRODUCT_STATUS.LIST)}
+            >
+              上架
+            </a>
+          )
+          : (
+            <a
+              key="unList"
+              style={{
+                color: 'green',
+              }}
+              onClick={() => onStatusChangeHandler(entity.id, PRODUCT_STATUS.LIST)}
+            >
+              下架
+            </a>
+          )}
         <a
           key="edit"
           onClick={() => onEditHandler(entity.id)}

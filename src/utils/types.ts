@@ -115,6 +115,7 @@ export interface IProduct {
   originalPrice: number;
   stock: number;
   preferentialPrice: number;
+  status: string;
   cards: ICard[];
 }
 
