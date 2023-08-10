@@ -45,7 +45,6 @@ const OrderTime = ({
       width={720}
       open
       onClose={() => onClose()}
-      forceRender
     >
       <Tabs
         type="card"
@@ -81,6 +80,9 @@ const OrderTime = ({
             }
             newData = [...orderTime, _.omit(d, 'index')];
             onSaveHandler(newData);
+          },
+          onDelete: async (key) => {
+            onDeleteHandler(key as number);
           },
         }}
       />

@@ -1,18 +1,21 @@
 import { ICourse } from '@/utils/types';
 import { ProColumns } from '@ant-design/pro-components';
-import { Button } from 'antd';
+import { Button, Space } from 'antd';
 
 interface IProps {
   onEditHandler: (id: string) => void
   onOrderTimeHandler: (id: string) => void
+  onCardHandler: (id: string) => void
 }
 
 export const getColumns: ({
   onEditHandler,
   onOrderTimeHandler,
+  onCardHandler,
 }: IProps) => ProColumns<ICourse, 'text'>[] = ({
   onEditHandler,
   onOrderTimeHandler,
+  onCardHandler,
 }) => [
   {
     title: '课程标题',
@@ -36,21 +39,31 @@ export const getColumns: ({
     valueType: 'option',
     dataIndex: 'id',
     align: 'center',
-    width: 200,
-    render: (text, entity) => [
-      <Button
-        key="edit"
-        type="link"
-        onClick={() => onEditHandler(entity.id)}
-      >
-        编辑
-      </Button>,
-      <Button
-        key="orderTime"
-        type="link"
-        onClick={() => onOrderTimeHandler(entity.id)}
-      >
-        可约时间
-      </Button>],
+    width: 300,
+    render: (text, entity) => (
+      <Space>
+        <Button
+          key="edit"
+          type="link"
+          onClick={() => onEditHandler(entity.id)}
+        >
+          编辑
+        </Button>
+        <Button
+          key="orderTime"
+          type="link"
+          onClick={() => onOrderTimeHandler(entity.id)}
+        >
+          可约时间
+        </Button>
+        <Button
+          key="card"
+          type="link"
+          onClick={() => onCardHandler(entity.id)}
+        >
+          关联消费卡
+        </Button>
+      </Space>
+    ),
   },
 ];
