@@ -11,7 +11,7 @@ import {
 import { useEffect, useRef } from 'react';
 
 /**
-*
+* 个人信息管理
 */
 const My = () => {
   const formRef = useRef<ProFormInstance>();
@@ -25,9 +25,9 @@ const My = () => {
       tel: store.tel,
       name: store.name,
       desc: store.desc,
-      avatar: {
+      avatar: [{
         url: store.avatar,
-      },
+      }],
     });
   }, [store]);
   return (
@@ -49,12 +49,12 @@ const My = () => {
               params: {
                 name: values.name,
                 desc: values.desc,
-                avatar: values.avatar?.url || '',
+                avatar: values.avatar[0]?.url || '',
               },
             },
           });
           if (res.data.updateUserInfo.code === 200) {
-            store.refetchHandler();
+            store.refetchHandler?.();
             message.success(res.data.updateUserInfo.message);
             return;
           }
