@@ -18,7 +18,12 @@ const getCxtProvider = (
   const [store, setStore] = useState(defaultValue);
 
   const value = useMemo(() => ({
-    key, store, setStore,
+    key,
+    store,
+    setStore: (payload = {}) => setStore((state) => ({
+      ...state,
+      ...payload,
+    })),
   }), [store]);
 
   return (

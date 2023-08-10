@@ -5,9 +5,10 @@ import { AUTH_TOKEN } from '@/utils/constants';
 
 import { ROUTE_KEY, routes } from '@/routes/menus';
 import { useGoTo } from '@/hooks';
-import { Space } from 'antd';
-import { LogoutOutlined } from '@ant-design/icons';
+import { Space, Tooltip } from 'antd';
+import { LogoutOutlined, ShopOutlined } from '@ant-design/icons';
 import style from './index.module.less';
+import OrgSelect from '../OrgSelect';
 
 const menuItemRender = (
   item: MenuDataItem,
@@ -26,6 +27,10 @@ const Layout = () => {
     sessionStorage.setItem(AUTH_TOKEN, '');
     localStorage.setItem(AUTH_TOKEN, '');
     nav('/login');
+  };
+
+  const goToOrg = () => {
+    go(ROUTE_KEY.ORG);
   };
 
   return (
@@ -52,6 +57,12 @@ const Layout = () => {
         path: '/',
         routes,
       }}
+      actionsRender={() => [
+        <OrgSelect />,
+        <Tooltip title="门店管理">
+          <ShopOutlined onClick={goToOrg} />
+        </Tooltip>,
+      ]}
       menuItemRender={menuItemRender}
     >
       {outlet}
