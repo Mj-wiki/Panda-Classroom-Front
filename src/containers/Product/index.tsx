@@ -1,5 +1,5 @@
 import { ActionType, PageContainer, ProTable } from '@ant-design/pro-components';
-import { useProducts } from '@/services/product';
+import { useDeleteProduct, useProducts } from '@/services/product';
 import { IProduct } from '@/utils/types';
 import { DEFAULT_PAGE_SIZE } from '@/utils/constants';
 import { Button } from 'antd';
@@ -15,7 +15,8 @@ import ConsumeCard from './components/ConsumeCard';
 const Product = () => {
   const actionRef = useRef<ActionType>();
   const [curId, setCurId] = useState('');
-  const { refetch } = useProducts();
+  const { refetch, loading } = useProducts();
+  const [delHandler, delLoading] = useDeleteProduct();
   const [showInfo, setShowInfo] = useState(false);
   const [showCard, setShowCard] = useState(false);
 
@@ -41,13 +42,17 @@ const Product = () => {
   };
 
   const onDeleteHandler = (id: string) => {
-    console.log('id', id);
+    delHandler(id, () => actionRef.current?.reload());
   };
 
   return (
     <PageContainer header={{ title: '当前门店下开设的课程' }}>
       <ProTable<IProduct>
         rowKey="id"
+        form={{
+          ignoreRules: false,
+        }}
+        loading={delLoading || loading}
         actionRef={actionRef}
         columns={getColumns({
           onEditHandler: onClickAddHandler,

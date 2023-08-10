@@ -26,7 +26,7 @@ export const GET_PRODUCTS = gql`
 `;
 
 export const COMMIT_PRODUCT = gql`
-  mutation commitProductInfo($params: PartialProductInput!, $id: String) {
+  mutation commitProductInfo($params: ProductInput!, $id: String) {
     commitProductInfo(params: $params, id: $id) {
       code
       message
@@ -41,24 +41,24 @@ export const GET_PRODUCT = gql`
       message
       data {
         id
+        limitBuyNumber
         name
+        coverUrl
+        bannerUrl
         desc
-        group
-        baseAbility
-        limitNumber
-        duration
-        reserveInfo
-        refundInfo
-        otherInfo
-        reducibleTime {
-          week
-          orderTime {
-            startTime
-            endTime
-            key
-          }
-        }
+        originalPrice
+        stock
+        preferentialPrice
       }
+    }
+  }
+`;
+
+export const DELETE_PRODUCT = gql`
+  mutation deleteProduct($id: String!) {
+    deleteProduct(id: $id) {
+      code
+      message
     }
   }
 `;

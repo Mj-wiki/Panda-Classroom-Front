@@ -1,6 +1,8 @@
 import { IProduct } from '@/utils/types';
 import { ProColumns } from '@ant-design/pro-components';
-import { Button, Image, Space } from 'antd';
+import {
+  Image, Popconfirm, Space,
+} from 'antd';
 
 interface IProps {
   onEditHandler: (id: string) => void
@@ -92,31 +94,36 @@ export const getColumns: ({
     valueType: 'option',
     dataIndex: 'id',
     align: 'center',
-    width: 300,
+    width: 200,
     render: (text, entity) => (
       <Space>
-        <Button
+        <a
           key="edit"
-          type="link"
           onClick={() => onEditHandler(entity.id)}
         >
           编辑
-        </Button>
-        <Button
+        </a>
+        <a
           key="card"
-          type="link"
           onClick={() => onCardHandler(entity.id)}
         >
           绑定消费卡
-        </Button>
-        <Button
-          key="delete"
-          danger
-          type="link"
-          onClick={() => onDeleteHandler(entity.id)}
+        </a>
+        <Popconfirm
+          title="提醒"
+          description="确认要删除吗？"
+          onConfirm={() => onDeleteHandler(entity.id)}
         >
-          删除
-        </Button>
+          <a
+            key="delete"
+            type="link"
+            style={{
+              color: 'red',
+            }}
+          >
+            删除
+          </a>
+        </Popconfirm>
       </Space>
     ),
   },
