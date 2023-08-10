@@ -19,3 +19,8 @@ export const getCardName = (type: string) => {
       return '-';
   }
 };
+
+// 预约课程状态
+export const SCHEDULE_STATUS = {
+  CANCEL: 'CANCEL',
+};

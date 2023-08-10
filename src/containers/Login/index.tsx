@@ -39,7 +39,7 @@ export default () => {
       variables: values,
     });
     if (res.data.login.code === 200) {
-      store.refetchHandler();
+      store.refetchHandler?.();
       if (values.autoLogin) {
         sessionStorage.setItem(AUTH_TOKEN, '');
         localStorage.setItem(AUTH_TOKEN, res.data.login.data);
