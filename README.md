@@ -15,3 +15,6 @@
 ## 百度地图坐标拾取
 - 地址：https://api.map.baidu.com/lbsapi/getpoint/index.html
 - 百度地图开放平台：https://lbsyun.baidu.com/solutions/reactBmapDoc
+
+## docker 部署
+- 构建 docker 镜像：`docker build -t pc:v1 .`

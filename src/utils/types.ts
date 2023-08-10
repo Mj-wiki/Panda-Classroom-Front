@@ -103,7 +103,7 @@ export interface ICard {
   type: string;
   time: number;
   validityDay: number;
-  course: ICourse;
+  course?: ICourse;
 }
 
 export type TCardsQuery = { [key: string]: { __typename?: 'Query', data: ICard[], page: IPage } };
