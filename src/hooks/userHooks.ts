@@ -17,7 +17,7 @@ export const useGetUser = () => {
   const { setStore } = useUserContext();
   const nav = useNavigate();
   const location = useLocation();
-  const { loading } = useQuery<{ getUserInfo: IUser }>(GET_USER, {
+  const { loading, refetch } = useQuery<{ getUserInfo: IUser }>(GET_USER, {
     onCompleted: (data) => {
       if (data.getUserInfo) {
         const { id, name, tel } = data.getUserInfo;
@@ -30,12 +30,14 @@ export const useGetUser = () => {
         }
         return;
       }
+      setStore({ refetchHandler: refetch });
       // 如果不在登录页面，但是目前没有登录，那就直接跳到登录页面
       if (location.pathname !== '/login') {
         nav(`/login?orgUrl=${location.pathname}`);
       }
     },
     onError: () => {
+      setStore({ refetchHandler: refetch });
       // 如果不在登录页面，但是目前登录异常，那就直接跳到登录页面
       if (location.pathname !== '/login') {
         nav(`/login?orgUrl=${location.pathname}`);
