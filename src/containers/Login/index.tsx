@@ -12,9 +12,9 @@ import {
   message, Tabs,
 } from 'antd';
 import { useMutation } from '@apollo/client';
+import { LOGIN, SEND_CODE_MSG } from '../../graphql/auth';
 
 import styles from './index.module.less';
-import { LOGIN, SEND_CODE_MSG } from '../../graphql/auth';
 
 interface IValue {
   tel: string;
@@ -29,11 +29,11 @@ export default () => {
     const res = await login({
       variables: values,
     });
-    if (res.data.login) {
-      message.success('登录成功');
+    if (res.data.login.code === 200) {
+      message.success(res.data.login.message);
       return;
     }
-    message.error('登录失败');
+    message.success(res.data.login.message);
   };
 
   return (
@@ -94,10 +94,10 @@ export default () => {
                   tel,
                 },
               });
-              if (res.data.sendCodeMsg) {
-                message.success('获取验证码成功!');
+              if (res.data.sendCodeMsg.code === 200) {
+                message.success(res.data.sendCodeMsg.message);
               } else {
-                message.error('获取验证码失败!');
+                message.error(res.data.sendCodeMsg.message);
               }
             }}
           />
