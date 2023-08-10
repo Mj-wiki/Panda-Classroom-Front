@@ -47,3 +47,13 @@ export type TBaseOrganization = Partial<IOrganization>;
 export type TOrgsQuery = { [key: string]: { __typename?: 'Query', data: IOrganization[], page: IPage } };
 
 export type TOrgQuery = { [key: string]: { __typename?: 'Query', data: IOrganization } };
+
+export interface IStudent {
+  name: string;
+  id: string;
+  tel: string;
+  avatar: string;
+  account: string;
+}
+
+export type TStudentQuery = { [key: string]: { __typename?: 'Query', data: IStudent[], page: IPage } };
