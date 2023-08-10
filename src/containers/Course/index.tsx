@@ -58,7 +58,7 @@ const Course = () => {
         ]}
         request={refetch}
       />
-      {showInfo && <EditCourse id={curId} onClose={() => closeAndRefetchHandler()} />}
+      {showInfo && <EditCourse id={curId} onClose={closeAndRefetchHandler} />}
       {showOrderTime && <OrderTime id={curId} onClose={() => setShowOrderTime(false)} />}
     </PageContainer>
   );

@@ -16,7 +16,7 @@ export const ROUTE_KEY = {
   COURSE: 'course',
   STUDENT: 'student',
   NO_ORG: 'noOrg',
-  PAGE_404: '404',
+  PAGE_404: 'p404',
 };
 
 export const ROUTE_CONFIG: Record<string, IRoute> = {

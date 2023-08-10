@@ -4,7 +4,7 @@ import { useUserContext } from '@/hooks/userHooks';
 import { AUTH_TOKEN } from '@/utils/constants';
 
 import { ROUTE_KEY, routes } from '@/routes/menus';
-import { useGoTo } from '@/hooks';
+import { useGoTo, useIsOrgRoute } from '@/hooks';
 import { Space, Tooltip } from 'antd';
 import { LogoutOutlined, ShopOutlined } from '@ant-design/icons';
 import style from './index.module.less';
@@ -20,6 +20,7 @@ const menuItemRender = (
 const Layout = () => {
   const outlet = useOutlet();
   const { store } = useUserContext();
+  const isOrg = useIsOrgRoute();
   const { go } = useGoTo();
   const nav = useNavigate();
 
@@ -58,14 +59,16 @@ const Layout = () => {
         routes,
       }}
       actionsRender={() => [
-        <OrgSelect />,
+        !isOrg && <OrgSelect />,
         <Tooltip title="门店管理">
           <ShopOutlined onClick={goToOrg} />
         </Tooltip>,
       ]}
       menuItemRender={menuItemRender}
     >
-      {outlet}
+      <div key={store.currentOrg}>
+        {outlet}
+      </div>
     </ProLayout>
   );
 };
