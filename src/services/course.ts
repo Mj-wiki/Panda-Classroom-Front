@@ -1,5 +1,5 @@
 import { message } from 'antd';
-import { TBaseCourse, TCoursesQuery } from '@/utils/types';
+import { TBaseCourse, TCourseQuery, TCoursesQuery } from '@/utils/types';
 import { useQuery, useMutation, useLazyQuery } from '@apollo/client';
 import { DEFAULT_PAGE_SIZE } from '@/utils/constants';
 import { COMMIT_COURSE, GET_COURSE, GET_COURSES } from '../graphql/course';
@@ -51,7 +51,7 @@ export const useCourses = (
   };
 };
 
-export const useEditInfo = (): [handleEdit: Function, loading: boolean] => {
+export const useEditCourseInfo = (): [handleEdit: Function, loading: boolean] => {
   const [edit, { loading }] = useMutation(COMMIT_COURSE);
 
   const handleEdit = async (
@@ -90,4 +90,14 @@ export const useCourse = () => {
   };
 
   return { getCourse, loading };
+};
+
+export const useCourseInfo = (id: string) => {
+  const { data, loading, refetch } = useQuery<TCourseQuery>(GET_COURSE, {
+    variables: {
+      id,
+    },
+  });
+
+  return { data: data?.getCourseInfo.data, loading, refetch };
 };

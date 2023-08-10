@@ -1,4 +1,4 @@
-import { useCourse, useEditInfo } from '@/services/course';
+import { useCourse, useEditCourseInfo } from '@/services/course';
 import {
   Button,
   Col,
@@ -31,12 +31,13 @@ const EditCourse = ({
   id,
 }: IProps) => {
   const [form] = Form.useForm();
-  const [edit, editLoading] = useEditInfo();
+  const [edit, editLoading] = useEditCourseInfo();
   const { getCourse, loading } = useCourse();
 
   useEffect(() => {
     const init = async () => {
       if (id) {
+        console.log('edit');
         const res = await getCourse(id);
         form.setFieldsValue(res);
       } else {

@@ -7,6 +7,7 @@ import { PlusOutlined } from '@ant-design/icons';
 import { useRef, useState } from 'react';
 import { getColumns } from './constants';
 import EditCourse from './components/EditCourse';
+import OrderTime from './components/OrderTime';
 
 /**
 * 当前门店下开设的课程
@@ -16,6 +17,8 @@ const Course = () => {
   const [curId, setCurId] = useState('');
   const { refetch } = useCourses();
   const [showInfo, setShowInfo] = useState(false);
+  const [showOrderTime, setShowOrderTime] = useState(false);
+
   const onClickAddHandler = (id?: string) => {
     if (id) {
       setCurId(id);
@@ -31,6 +34,11 @@ const Course = () => {
       actionRef.current?.reload();
     }
   };
+
+  const onOrderTimeHandler = (id: string) => {
+    setCurId(id);
+    setShowOrderTime(true);
+  };
   return (
     <PageContainer header={{ title: '当前门店下开设的课程' }}>
       <ProTable<ICourse>
@@ -38,6 +46,7 @@ const Course = () => {
         actionRef={actionRef}
         columns={getColumns({
           onEditHandler: onClickAddHandler,
+          onOrderTimeHandler,
         })}
         pagination={{
           pageSize: DEFAULT_PAGE_SIZE,
@@ -50,6 +59,7 @@ const Course = () => {
         request={refetch}
       />
       <EditCourse id={curId} open={showInfo} onClose={() => closeAndRefetchHandler()} />
+      <OrderTime id={curId} open={showOrderTime} onClose={() => setShowOrderTime(false)} />
     </PageContainer>
   );
 };
