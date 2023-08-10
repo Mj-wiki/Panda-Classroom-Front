@@ -1,4 +1,6 @@
-import { HomeOutlined, ShopOutlined, TeamOutlined } from '@ant-design/icons';
+import {
+  HomeOutlined, PicRightOutlined, ShopOutlined, TeamOutlined,
+} from '@ant-design/icons';
 
 interface IRoute {
   path: string;
@@ -11,6 +13,7 @@ export const ROUTE_KEY = {
   HOME: 'home',
   MY: 'my',
   ORG: 'org',
+  COURSE: 'course',
   STUDENT: 'student',
   NO_ORG: 'noOrg',
   PAGE_404: '404',
@@ -33,6 +36,11 @@ export const ROUTE_CONFIG: Record<string, IRoute> = {
     name: '门店管理',
     hideInMenu: true,
     icon: <ShopOutlined />,
+  },
+  [ROUTE_KEY.COURSE]: {
+    path: 'course',
+    name: '课程管理',
+    icon: <PicRightOutlined />,
   },
   [ROUTE_KEY.NO_ORG]: {
     path: 'noOrg',
