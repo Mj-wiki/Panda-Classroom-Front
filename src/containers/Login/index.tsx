@@ -11,11 +11,12 @@ import {
 import {
   message, Tabs,
 } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
-import { LOGIN, SEND_CODE_MSG } from '../../graphql/auth';
-import { AUTH_TOKEN } from '../../utils/constants';
+import { AUTH_TOKEN } from '@/utils/constants';
+import { LOGIN, SEND_CODE_MSG } from '@/graphql/auth';
 
+import { useTitle } from '@/hooks';
 import styles from './index.module.less';
 
 interface IValue {
@@ -27,7 +28,10 @@ interface IValue {
 export default () => {
   const [run] = useMutation(SEND_CODE_MSG);
   const [login] = useMutation(LOGIN);
+  const [params] = useSearchParams();
   const nav = useNavigate();
+
+  useTitle('登录');
 
   const loginHandler = async (values: IValue) => {
     const res = await login({
@@ -35,25 +39,34 @@ export default () => {
     });
     if (res.data.login.code === 200) {
       if (values.autoLogin) {
+        sessionStorage.setItem(AUTH_TOKEN, '');
         localStorage.setItem(AUTH_TOKEN, res.data.login.data);
+      } else {
+        localStorage.setItem(AUTH_TOKEN, '');
+        sessionStorage.setItem(AUTH_TOKEN, res.data.login.data);
       }
       message.success(res.data.login.message);
-      nav('/');
+      nav(params.get('orgUrl') || '/');
       return;
     }
-    message.success(res.data.login.message);
+    message.error(res.data.login.message);
   };
 
   return (
     <div className={styles.container}>
       <LoginFormPage
+        initialValues={{ tel: '19357227510' }}
         onFinish={loginHandler}
         backgroundImageUrl="https://gw.alipayobjects.com/zos/rmsportal/FfdJeJRQWjEeGTpqgBKj.png"
         logo="http://water-drop-assets.oss-cn-hangzhou.aliyuncs.com/images/henglogo.png"
       >
-        <Tabs centered>
-          <Tabs.TabPane key="phone" tab="手机号登录" />
-        </Tabs>
+        <Tabs
+          centered
+          items={[{
+            key: 'phone',
+            label: '手机号登录',
+          }]}
+        />
         <>
           <ProFormText
             fieldProps={{

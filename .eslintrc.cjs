@@ -18,6 +18,16 @@ module.exports = {
   settings: {
     react: {
       'version': 'detect'
+    },
+    'import/resolver': {
+      'alias': {
+        'map': [
+          [
+            '@', './src'
+          ]
+        ],
+        'extensions': ['.ts', '.tsx']
+      }
     }
   }
 }

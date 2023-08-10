@@ -10,8 +10,8 @@ import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <ApolloProvider client={client}>
-    <UserInfo>
-      <BrowserRouter>
+    <BrowserRouter>
+      <UserInfo>
         <Routes>
           {ROUTE_CONFIG.map((item) => (
             <Route
@@ -22,7 +22,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
           ))}
           <Route path="*" element={<Page404 />} />
         </Routes>
-      </BrowserRouter>
-    </UserInfo>
+      </UserInfo>
+    </BrowserRouter>
   </ApolloProvider>,
 );
