@@ -1,6 +1,8 @@
 import { message } from 'antd';
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_ORGS, GET_ORG, COMMIT_ORG } from '@/graphql/org';
+import {
+  GET_ORGS, GET_ORG, COMMIT_ORG, DEL_ORG,
+} from '@/graphql/org';
 import { DEFAULT_PAGE_SIZE } from '@/utils/constants';
 import { TOrgsQuery, TOrgQuery, TBaseOrganization } from '@/utils/types';
 
@@ -51,12 +53,22 @@ export const useEditInfo = (): [handleEdit: Function, loading: boolean] => {
   return [handleEdit, loading];
 };
 
-export const useSampleOrgForOrg = () => {
-  const { loading, error, data } = useQuery<TOrgsQuery>(
-    FIND_SAMPLE_ORGS_FOR_ORG,
-    {
-      variables: {},
-    },
-  );
-  return { loading, error, data: data?.sampleOrganizationsForOrg.data };
+export const useDeleteOrg = (): [handleEdit: Function, loading: boolean] => {
+  const [del, { loading }] = useMutation(DEL_ORG);
+
+  const delHandler = async (id: number, callback: () => void) => {
+    const res = await del({
+      variables: {
+        id,
+      },
+    });
+    if (res.data.deleteOrganization.code === 200) {
+      message.success(res.data.deleteOrganization.message);
+      callback();
+      return;
+    }
+    message.error(res.data.deleteOrganization.message);
+  };
+
+  return [delHandler, loading];
 };
