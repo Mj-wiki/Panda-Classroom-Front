@@ -88,6 +88,7 @@ export interface ICourse {
   refundInfo?: string;
   otherInfo?: string;
   reducibleTime: IWeekCourse[];
+  teachers: ITeacher[];
 }
 
 export type TCoursesQuery = { [key: string]: { __typename?: 'Query', data: ICourse[], page: IPage } };
@@ -152,3 +153,15 @@ export interface ITeacher {
 export type TBaseTeacher = Partial<ITeacher>;
 export type TTeachersQuery = { [key: string]: { __typename?: 'Query', data: ITeacher[], page: IPage } };
 export type TTeacherQuery = { [key: string]: { __typename?: 'Query', data: ITeacher } };
+
+export interface ISchedule {
+  id: string;
+  schoolDay: string;
+  startTime: string;
+  endTime: string;
+  limitNumber: number; // 限制上课人数
+  course: ICourse;
+  org: IOrganization;
+}
+
+export type TSchedulesQuery = { [key: string]: { __typename?: 'Query', data: ISchedule[] } };

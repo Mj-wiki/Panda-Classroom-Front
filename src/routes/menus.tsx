@@ -26,8 +26,9 @@ export const ROUTE_KEY = {
 
 export const ROUTE_CONFIG: Record<string, IRoute> = {
   [ROUTE_KEY.HOME]: {
-    path: 'home',
+    path: '/',
     name: '首页',
+    hideInMenu: true,
     icon: <HomeOutlined />,
   },
   [ROUTE_KEY.MY]: {
