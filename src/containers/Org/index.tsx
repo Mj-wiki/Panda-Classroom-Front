@@ -52,8 +52,10 @@ const Org = () => {
       <Button type="link" onClick={() => editInfoHandler(item.id)}>编辑</Button>,
       <Popconfirm
         title="提醒"
+        okButtonProps={{
+          loading: delLoading,
+        }}
         description={`确定要删除 ${item.name} 吗？`}
-        loading={delLoading}
         onConfirm={() => delInfoHandler(item.id)}
       >
         <Button type="link">删除</Button>
