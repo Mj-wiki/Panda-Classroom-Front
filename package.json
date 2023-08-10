@@ -13,6 +13,7 @@
     "@ant-design/pro-components": "^2.3.47",
     "@apollo/client": "^3.7.1",
     "antd": "^5.0.7",
+    "antd-img-crop": "^4.5.2",
     "antd-mobile": "^5.26.0",
     "graphql": "^16.6.0",
     "less": "^4.1.3",

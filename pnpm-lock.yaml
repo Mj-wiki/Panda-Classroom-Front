@@ -11,6 +11,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.44.0
   '@vitejs/plugin-react': ^2.2.0
   antd: ^5.0.7
+  antd-img-crop: ^4.5.2
   antd-mobile: ^5.26.0
   eslint: ^8.28.0
   eslint-config-airbnb: ^19.0.4
@@ -34,6 +35,7 @@ dependencies:
   '@ant-design/pro-components': 2.3.47_6rfq2pnhqj44uztbqg7rdcd5m4
   '@apollo/client': 3.7.2_gdcq4dv6opitr3wbfwyjmanyra
   antd: 5.0.7_biqbaboplfbrettd7655fr4n2y
+  antd-img-crop: 4.5.2_6rfq2pnhqj44uztbqg7rdcd5m4
   antd-mobile: 5.27.0_biqbaboplfbrettd7655fr4n2y
   graphql: 16.6.0
   less: 4.1.3
@@ -1600,6 +1602,21 @@ packages:
       color-convert: 2.0.1
     dev: true
 
+  /antd-img-crop/4.5.2_6rfq2pnhqj44uztbqg7rdcd5m4:
+    resolution: {integrity: sha512-eO5xwJ5Zfu1wZJpK3Hn3xuHnYk/BMrGq+xVAO5iKlGXHO9qs1foG6g7KsBJfRHzNjIRD1TpmYYvEExSPzjsBfQ==}
+    peerDependencies:
+      antd: '>=4.0.0'
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      antd: 5.0.7_biqbaboplfbrettd7655fr4n2y
+      compare-versions: 5.0.3
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      react-easy-crop: 4.6.3_biqbaboplfbrettd7655fr4n2y
+      tslib: 2.4.1
+    dev: false
+
   /antd-mobile-icons/0.3.0:
     resolution: {integrity: sha512-rqINQpJWZWrva9moCd1Ye695MZYWmqLPE+bY8d2xLRy7iSQwPsinCdZYjpUPp2zL/LnKYSyXxP2ut2A+DC+whQ==}
     dev: false
@@ -1905,6 +1922,10 @@ packages:
     dependencies:
       delayed-stream: 1.0.0
     dev: true
+
+  /compare-versions/5.0.3:
+    resolution: {integrity: sha512-4UZlZP8Z99MGEY+Ovg/uJxJuvoXuN4M6B3hKaiackiHrgzQFEe3diJi1mf1PNHbFujM7FvLrK2bpgIaImbtZ1A==}
+    dev: false
 
   /compute-scroll-into-view/2.0.2:
     resolution: {integrity: sha512-W+4Iti92hktsTtNPNeRM1vE0JdqCBk5qIabRafpr5pGrQhQ+xzCv0NGnFzTCKmW4yGLm9Aovbw8YNxloe2z9tQ==}
@@ -3473,6 +3494,10 @@ packages:
     resolution: {integrity: sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==}
     dev: true
 
+  /normalize-wheel/1.0.1:
+    resolution: {integrity: sha512-1OnlAPZ3zgrk8B91HyRj+eVv+kS5u+Z0SCsak6Xil/kmgEia50ga7zfkumayonZrImffAxPU/5WcyGhzetHNPA==}
+    dev: false
+
   /object-assign/4.1.1:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
@@ -4264,6 +4289,18 @@ packages:
       scheduler: 0.23.0
     dev: false
 
+  /react-easy-crop/4.6.3_biqbaboplfbrettd7655fr4n2y:
+    resolution: {integrity: sha512-xeP5Cq56xDK2QkGs6RIrVXQs7cDan9B16yUt/3XqFN7siSjLgXkDfKNri8eC8CFSd3AFs0NX6IpIeIPBf4PCBA==}
+    peerDependencies:
+      react: '>=16.4.0'
+      react-dom: '>=16.4.0'
+    dependencies:
+      normalize-wheel: 1.0.1
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+      tslib: 2.0.1
+    dev: false
+
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
@@ -4713,6 +4750,10 @@ packages:
   /tslib/1.14.1:
     resolution: {integrity: sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==}
     dev: true
+
+  /tslib/2.0.1:
+    resolution: {integrity: sha512-SgIkNheinmEBgx1IUNirK0TUD4X9yjjBRTqqjggWCU3pUEqIk3/Uwl3yRixYKT6WjQuGiwDv4NomL3wqRCj+CQ==}
+    dev: false
 
   /tslib/2.4.1:
     resolution: {integrity: sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==}
