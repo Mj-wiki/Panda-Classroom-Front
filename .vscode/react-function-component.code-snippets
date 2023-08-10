@@ -1,0 +1,53 @@
+{
+  "log": {
+    "prefix": "log",
+    "body": [
+      "console.log('$1', $1);"
+    ]
+  },
+  "Function Component": {
+    "prefix": "cc",
+    "body": [
+      "import { useState, useEffect } from 'react';",
+      "",
+      "import style from './index.module.less';",
+      "",
+      "/**",
+      "*$2",
+      "*/",
+      "const $1 = ({}) => {",
+      "\tconst [state, setState] = useState();",
+      "\tuseEffect(() => {",
+      "\t\tconsole.log(state, setState);",
+      "\t}, []);",
+      "\treturn (<div className={style.container}>sss</div>);",
+      "};",
+      "",
+      "export default $1;",
+      "",
+    ],
+    "description": "Class Component"
+  },
+
+  "Function Syntax Component": {
+    "prefix": "ffc",
+    "body": [
+      "function $1($2) {",
+      "\treturn ( $0 );",
+      "}",
+      "",
+      "export default $1;"
+    ],
+    "description": "Function Syntax Component"
+  },
+  
+  "useEffect": {
+    "prefix": "uef",
+    "body": [
+      "useEffect(() => {",
+      "\t$1",
+      "}, []);"
+    ],
+    "description": "useEffect Hook"
+  }
+}

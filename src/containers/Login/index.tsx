@@ -32,9 +32,6 @@ export default () => {
   const [params] = useSearchParams();
   const { store } = useUserContext();
   const nav = useNavigate();
-
-  console.log('store', store);
-
   useTitle('登录');
 
   const loginHandler = async (values: IValue) => {
