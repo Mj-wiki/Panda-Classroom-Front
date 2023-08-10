@@ -100,3 +100,24 @@ export interface ICard {
 }
 
 export type TCardsQuery = { [key: string]: { __typename?: 'Query', data: ICard[], page: IPage } };
+
+/**
+ * 商品类型
+ */
+export interface IProduct {
+  id: string;
+  limitBuyNumber: number;
+  name: string;
+  coverUrl?: string;
+  bannerUrl?: string;
+  desc: string;
+  originalPrice: number;
+  stock: number;
+  preferentialPrice: number;
+}
+
+export type TProductsQuery = { [key: string]: { __typename?: 'Query', data: IProduct[], page: IPage } };
+
+export type TProductQuery = { [key: string]: { __typename?: 'Query', data: IProduct, page: IPage } };
+
+export type TBaseProduct = Partial<IProduct>;

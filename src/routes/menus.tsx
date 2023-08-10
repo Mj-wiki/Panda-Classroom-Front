@@ -1,4 +1,5 @@
 import {
+  GiftOutlined,
   HomeOutlined, PicRightOutlined, ShopOutlined, TeamOutlined,
 } from '@ant-design/icons';
 
@@ -15,6 +16,7 @@ export const ROUTE_KEY = {
   ORG: 'org',
   COURSE: 'course',
   STUDENT: 'student',
+  PRODUCT: 'product',
   NO_ORG: 'noOrg',
   PAGE_404: 'p404',
 };
@@ -51,6 +53,11 @@ export const ROUTE_CONFIG: Record<string, IRoute> = {
     path: 'student',
     name: '学员管理',
     icon: <TeamOutlined />,
+  },
+  [ROUTE_KEY.PRODUCT]: {
+    path: 'product',
+    name: '商品管理',
+    icon: <GiftOutlined />,
   },
   [ROUTE_KEY.PAGE_404]:
   {
