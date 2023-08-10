@@ -7,6 +7,7 @@ import {
 import UploadImage from '@/components/OSSImageUpload';
 import { useEditProductInfo, useProductInfo } from '@/services/product';
 import { useState } from 'react';
+import TypeSelect from '@/components/TypeSelect';
 
 const { TextArea } = Input;
 
@@ -42,7 +43,7 @@ const EditCourse = ({
   return (
     <Drawer
       title={id ? '编辑商品' : '新建商品'}
-      width={720}
+      width={900}
       open={open}
       onClose={() => setOpen(false)}
       afterOpenChange={(o) => !o && onClose()}
@@ -74,6 +75,17 @@ const EditCourse = ({
             </Col>
             <Col span={6}>
               <Form.Item
+                label="商品分类"
+                name="type"
+                rules={[{ required: true }]}
+              >
+                <TypeSelect />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Row gutter={20}>
+            <Col span={6}>
+              <Form.Item
                 label="库存总额"
                 name="stock"
                 rules={[{ required: true }]}
@@ -81,9 +93,7 @@ const EditCourse = ({
                 <InputNumber />
               </Form.Item>
             </Col>
-          </Row>
-          <Row gutter={20}>
-            <Col span={8}>
+            <Col span={6}>
               <Form.Item
                 label="原价"
                 name="originalPrice"
@@ -92,7 +102,7 @@ const EditCourse = ({
                 <InputNumber />
               </Form.Item>
             </Col>
-            <Col span={8}>
+            <Col span={6}>
               <Form.Item
                 label="优惠价"
                 name="preferentialPrice"
@@ -101,7 +111,7 @@ const EditCourse = ({
                 <InputNumber />
               </Form.Item>
             </Col>
-            <Col span={8}>
+            <Col span={6}>
               <Form.Item
                 label="每人限购数量"
                 name="limitBuyNumber"

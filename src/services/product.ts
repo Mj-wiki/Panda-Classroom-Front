@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
 import { message } from 'antd';
-import { TBaseProduct, TProductQuery, TProductsQuery } from '@/utils/types';
+import {
+  TBaseProduct, TProductQuery, TProductsQuery, TProductTypeQuery,
+} from '@/utils/types';
 import { useQuery, useMutation } from '@apollo/client';
 import { DEFAULT_PAGE_SIZE } from '@/utils/constants';
 import {
-  GET_PRODUCTS, GET_PRODUCT, COMMIT_PRODUCT, DELETE_PRODUCT,
+  GET_PRODUCTS, GET_PRODUCT, COMMIT_PRODUCT, DELETE_PRODUCT, GET_PRODUCT_TYPES,
 } from '@/graphql/product';
 
 export const useProducts = (
@@ -114,4 +116,17 @@ export const useDeleteProduct = (): [handleEdit: Function, loading: boolean] => 
   };
 
   return [delHandler, loading];
+};
+
+/**
+ * 获取商品分类数据
+ * @returns
+ */
+export const useProductTypes = () => {
+  const { data, loading } = useQuery<TProductTypeQuery>(GET_PRODUCT_TYPES);
+
+  return {
+    data: data?.getProductTypes.data || [],
+    loading,
+  };
 };

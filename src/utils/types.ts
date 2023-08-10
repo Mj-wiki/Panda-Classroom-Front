@@ -119,9 +119,16 @@ export interface IProduct {
   cards: ICard[];
 }
 
+export interface IProductType {
+  key: string;
+  title: string;
+}
+
 export type TProductsQuery = { [key: string]: { __typename?: 'Query', data: IProduct[], page: IPage } };
 
 export type TProductQuery = { [key: string]: { __typename?: 'Query', data: IProduct } };
+
+export type TProductTypeQuery = { [key: string]: { __typename?: 'Query', data: IProductType[] } };
 
 export type TBaseProduct = Partial<IProduct>;
 
