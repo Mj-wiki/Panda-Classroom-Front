@@ -118,7 +118,7 @@ export const getColumns: (props: IProps) => ProColumns<IProduct, 'text'>[] = ({
               style={{
                 color: 'green',
               }}
-              onClick={() => onStatusChangeHandler(entity.id, PRODUCT_STATUS.LIST)}
+              onClick={() => onStatusChangeHandler(entity.id, PRODUCT_STATUS.UN_LIST)}
             >
               下架
             </a>

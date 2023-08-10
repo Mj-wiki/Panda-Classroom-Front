@@ -11,3 +11,7 @@
 - 配置路由
 - 配置菜单
 - 编写页面代码
+
+## 百度地图坐标拾取
+- 地址：https://api.map.baidu.com/lbsapi/getpoint/index.html
+- 百度地图开放平台：https://lbsyun.baidu.com/solutions/reactBmapDoc
