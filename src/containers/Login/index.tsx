@@ -14,9 +14,9 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { LOGIN, SEND_CODE_MSG } from '../../graphql/auth';
+import { AUTH_TOKEN } from '../../utils/constants';
 
 import styles from './index.module.less';
-import { AUTH_TOKEN } from '../../utils/constants';
 
 interface IValue {
   tel: string;
