@@ -131,7 +131,7 @@ export default () => {
           }}
         >
           <ProFormCheckbox noStyle name="autoLogin">
-            自动登录
+            自动登录（万能验证码 1024）
           </ProFormCheckbox>
         </div>
       </LoginFormPage>

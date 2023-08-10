@@ -5,10 +5,7 @@ import { message } from 'antd';
 import { onError } from '@apollo/client/link/error'; // 引入onError
 import { AUTH_TOKEN } from './constants';
 
-let uri = `http://${window.location.hostname}:3000/graphql`;
-if (process.env.NODE_ENV === 'production') {
-  uri = 'https://water-drop.yondu.vip/graphql';
-}
+const uri = '/graphql';
 
 const httpLink = createHttpLink({
   uri,
