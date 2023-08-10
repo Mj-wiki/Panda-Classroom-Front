@@ -5,6 +5,9 @@ import {
   Drawer, Form, Input, InputNumber, Row, Space, Spin,
 } from 'antd';
 import { useEffect } from 'react';
+import UploadImage from '@/components/OSSImageUpload';
+import TeacherSelect from '@/components/TeacherSelect';
+import { ITeacher, IValue } from '@/utils/types';
 
 const { TextArea } = Input;
 
@@ -36,7 +39,14 @@ const EditCourse = ({
     const init = async () => {
       if (id) {
         const res = await getCourse(id);
-        form.setFieldsValue(res);
+        form.setFieldsValue({
+          ...res,
+          teachers: res.teachers ? res.teachers.map((item: ITeacher) => ({
+            label: item.name,
+            value: item.id,
+          })) : [],
+          coverUrl: res.coverUrl ? [{ url: res.coverUrl }] : [],
+        });
       } else {
         form.resetFields();
       }
@@ -47,7 +57,11 @@ const EditCourse = ({
   const onSubmitHandler = async () => {
     const values = await form.validateFields();
     if (values) {
-      edit(id, values, onClose);
+      edit(id, {
+        ...values,
+        teachers: values.teachers?.map((item: IValue) => item.value),
+        coverUrl: values.coverUrl[0].url,
+      }, onClose);
     }
   };
 
@@ -71,6 +85,15 @@ const EditCourse = ({
           form={form}
         >
           <Form.Item
+            label="封面图"
+            name="coverUrl"
+            rules={[{
+              required: true,
+            }]}
+          >
+            <UploadImage imgCropAspect={2 / 1} />
+          </Form.Item>
+          <Form.Item
             label="课程名称"
             name="name"
             rules={[{
@@ -78,6 +101,15 @@ const EditCourse = ({
             }]}
           >
             <Input />
+          </Form.Item>
+          <Form.Item
+            label="任课老师"
+            name="teachers"
+            rules={[{
+              required: true,
+            }]}
+          >
+            <TeacherSelect />
           </Form.Item>
           <Form.Item
             label="课程描述"
