@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.8.0",
-    "@ant-design/pro-components": "^2.3.47",
+    "@ant-design/pro-components": "^2.3.54",
     "@apollo/client": "^3.7.1",
     "antd": "^5.0.7",
     "antd-img-crop": "^4.5.2",
