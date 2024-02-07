@@ -14,7 +14,7 @@ export default defineConfig({
       '/graphql': 'http://localhost:3000'
     }
   },
-  plugins: [react(), eslint()],
+  // plugins: [react(), eslint()],
   resolve: {
     alias: [
       {
