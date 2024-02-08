@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import Icon, {
   LockOutlined,
   MobileOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
 import {
   LoginFormPage,
@@ -27,12 +29,13 @@ interface IValue {
   code: string;
   autoLogin: boolean;
 }
-
+type LoginType = 'phone' | 'account';
 export default () => {
   const [run] = useMutation(SEND_CODE_MSG);
   const [login] = useMutation(LOGIN);
   const [params] = useSearchParams();
   const { store } = useUserContext();
+  const [loginType, setLoginType] = useState<LoginType>('phone')
   const nav = useNavigate();
   useTitle('登录');
   const PandaSvg = () => (
@@ -110,14 +113,57 @@ export default () => {
         title="小熊课堂"
         subTitle="全球最好的在线教育平台"
       >
-        {/* <Tabs
+        <Tabs
           centered
-          items={[{
-            key: 'phone',
-            label: '手机号登录',
-          }]}
-        /> */}
-        <>
+          activeKey={loginType}
+          onChange={(activeKey) => setLoginType(activeKey as LoginType)}
+        >
+          <Tabs.TabPane key={'account'} tab={'账号密码登录'} />
+          <Tabs.TabPane key={'phone'} tab={'手机号登录'} />
+        </Tabs>
+        {loginType === 'account' && (
+          <>
+          <ProFormText
+          name="username"
+          fieldProps={{
+            size: 'large',
+            prefix: (
+              <UserOutlined      
+                className={'prefixIcon'}
+              />
+            ),
+          }}
+          placeholder={'请输入用户名'}
+          rules={[
+            {
+              required: true,
+              message: '请输入用户名!',
+            },
+          ]}
+        />
+        <ProFormText.Password
+          name="password"
+          fieldProps={{
+            size: 'large',
+            prefix: (
+              <LockOutlined
+                className={'prefixIcon'}
+              />
+            ),
+          }}
+          placeholder={'请输入密码'}
+          rules={[
+            {
+              required: true,
+              message: '请输入密码！',
+            },
+          ]}
+        />
+      </>
+        )}
+        {
+          loginType === 'phone' && (
+            <>
           <ProFormText
             fieldProps={{
               size: 'large',
@@ -173,6 +219,9 @@ export default () => {
             }}
           />
         </>
+          )
+        }
+        
         <div
           style={{
             marginBlockEnd: 24,
