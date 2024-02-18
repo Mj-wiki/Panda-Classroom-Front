@@ -9,8 +9,7 @@
 ## 初始化项目
 - 关联远程：git branch --set-upstream-to=origin/main master
 - 拉代码：git pull origin main --allow-unrelated-histories
-- 提交到远程：git push -u origin main
-- 
+- 提交到远程：git push origin master:main
 
 ## 百度地图坐标拾取
 - 地址：https://api.map.baidu.com/lbsapi/getpoint/index.html
