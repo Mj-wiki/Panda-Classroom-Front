@@ -6,8 +6,8 @@
 - Graphql 文档：https://graphql.org/learn/
 - Graphql Apollo 文档： https://www.apollographql.com/docs/react/
 
-## 如何新建一个页面？
-- 创建一个 container
+## 初始化项目
+- git push -u origin main
 - 配置路由
 - 配置菜单
 - 编写页面代码
