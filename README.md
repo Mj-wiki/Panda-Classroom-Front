@@ -7,9 +7,8 @@
 - Graphql Apollo 文档： https://www.apollographql.com/docs/react/
 
 ## 初始化项目
+- git branch --set-upstream-to=origin/main master
 - git push -u origin main
-- 配置路由
-- 配置菜单
 - 编写页面代码
 
 ## 百度地图坐标拾取
