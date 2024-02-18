@@ -6,7 +6,7 @@ import { AUTH_TOKEN } from '@/utils/constants';
 import { ROUTE_KEY, routes } from '@/routes/menus';
 import { useGoTo, useIsOrgRoute } from '@/hooks';
 import { Space, Tooltip } from 'antd';
-import { LogoutOutlined, ShopOutlined } from '@ant-design/icons';
+import { LogoutOutlined, ShopOutlined, SmileTwoTone } from '@ant-design/icons';
 import style from './index.module.less';
 import OrgSelect from '../OrgSelect';
 
@@ -51,7 +51,7 @@ const Layout = () => {
         </Space>,
       ]}
       title={false}
-      logo={<img src="https://water-drop-assets.oss-cn-hangzhou.aliyuncs.com/images/henglogo.png" alt="logo" />}
+      logo={<SmileTwoTone />}
       className={style.container}
       onMenuHeaderClick={() => nav('/')}
       route={{
