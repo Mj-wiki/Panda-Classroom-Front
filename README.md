@@ -7,7 +7,8 @@
 - Graphql Apollo 文档： https://www.apollographql.com/docs/react/
 
 ## 初始化项目
-- git branch --set-upstream-to=origin/main master
+- 关联远程：git branch --set-upstream-to=origin/main master
+- 拉代码：git pull origin main --allow-unrelated-histories
 - git push -u origin main
 - 编写页面代码
 
