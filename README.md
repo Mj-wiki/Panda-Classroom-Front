@@ -9,6 +9,8 @@
 ## 初始化项目
 - 关联远程：git branch --set-upstream-to=origin/main master
 - 拉代码：git pull origin main --allow-unrelated-histories
+- 报443错误的时候关闭代理：git config --global --unset http.proxy
+- git config --global --unset https.proxy
 - 提交到远程：git push origin master:main
 
 ## 百度地图坐标拾取
