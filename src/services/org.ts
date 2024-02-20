@@ -42,20 +42,23 @@ export const useOrganization = (id: string) => {
   };
 };
 
-export const useEditInfo = (): [handleEdit: Function, loading: boolean] => {
+export const useEditInfo = (): [handleEdit: Function, loading: boolean, refreshList: Function] => {
   const [edit, { loading }] = useMutation(COMMIT_ORG);
-
-  const handleEdit = async (id: number, params: TBaseOrganization) => {
+  const refreshList = (callback: Function) => {
+    callback()
+  }
+  const handleEdit = async (id: number, params: TBaseOrganization, updateList: Function) => {
     const res = await edit({
       variables: {
         id,
         params,
       },
     });
+    refreshList(updateList)
     message.info(res.data.commitOrganization.message);
   };
 
-  return [handleEdit, loading];
+  return [handleEdit, loading, refreshList];
 };
 
 export const useDeleteOrg = (): [handleEdit: Function, loading: boolean] => {

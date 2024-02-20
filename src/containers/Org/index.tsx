@@ -32,6 +32,7 @@ const Org = () => {
 
   const onCloseHandler = () => {
     setShowEdit(false);
+    console.log('重新获取列表----')
     refetch();
   };
 

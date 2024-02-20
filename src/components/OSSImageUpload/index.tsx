@@ -32,7 +32,7 @@ const OSSImageUpload = ({
   onChange,
 }: OSSUploadProps) => {
   const { data, refetch } = useQuery<{ getOSSInfo: OSSDataType }>(GET_OSS_INFO);
-
+  console.log(GET_OSS_INFO,data,'oss上传')
   const OSSData = data?.getOSSInfo;
 
   const getKey = (file: UploadFile) => {

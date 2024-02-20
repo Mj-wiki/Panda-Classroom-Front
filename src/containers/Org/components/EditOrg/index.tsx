@@ -3,8 +3,9 @@ import {
   Col, Divider, Drawer, Form, Input, Row, Select, Spin, UploadFile,
 } from 'antd';
 import UploadImage from '@/components/OSSImageUpload';
-import { useOrganization, useEditInfo } from '@/services/org';
+import { useOrganization, useEditInfo, useOrganizations } from '@/services/org';
 import { useMemo } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { IOrganization } from '@/utils/types';
 import style from './index.module.less';
 
@@ -20,8 +21,9 @@ const EditOrg = ({
   onClose,
 }: IProp) => {
   const [form] = Form.useForm();
-
-  const { data, loading: queryLoading } = useOrganization(id);
+  const nav = useNavigate();
+  const { data, loading: queryLoading, } = useOrganization(id);
+  
   const [edit, editLoading] = useEditInfo();
 
   const onFinishHandler = async () => {
@@ -38,8 +40,8 @@ const EditOrg = ({
         orgRoomImg: values?.orgRoomImg?.map((item: UploadFile) => ({ url: item.url })),
         orgOtherImg: values?.orgOtherImg?.map((item: UploadFile) => ({ url: item.url })),
       } as IOrganization;
-      edit(id, formData);
-    }
+      edit(id, formData, onClose)
+    } 
   };
 
   const initValue = useMemo(() => (data ? {
