@@ -1,7 +1,7 @@
 import { MenuDataItem, ProLayout } from '@ant-design/pro-components';
 import { Link, useNavigate, useOutlet } from 'react-router-dom';
 import { useUserContext } from '@/hooks/userHooks';
-import { AUTH_TOKEN } from '@/utils/constants';
+import { AUTH_TOKEN, LOCAL_CURRENT_ORG } from '@/utils/constants';
 
 import { ROUTE_KEY, routes } from '@/routes/menus';
 import { useGoTo, useIsOrgRoute } from '@/hooks';
@@ -27,6 +27,7 @@ const Layout = () => {
   const logoutHandler = () => {
     sessionStorage.setItem(AUTH_TOKEN, '');
     localStorage.setItem(AUTH_TOKEN, '');
+    localStorage.removeItem(LOCAL_CURRENT_ORG)
     nav('/login');
   };
 

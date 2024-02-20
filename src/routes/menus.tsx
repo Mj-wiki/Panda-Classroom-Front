@@ -2,7 +2,7 @@ import {
   GiftOutlined,
   HomeOutlined, IdcardOutlined,
   PicRightOutlined, ShopOutlined,
-  TeamOutlined,
+  TeamOutlined, UserOutlined
 } from '@ant-design/icons';
 
 interface IRoute {
@@ -28,19 +28,19 @@ export const ROUTE_CONFIG: Record<string, IRoute> = {
   [ROUTE_KEY.HOME]: {
     path: '/',
     name: '首页',
-    hideInMenu: true,
+    // hideInMenu: true,
     icon: <HomeOutlined />,
   },
   [ROUTE_KEY.MY]: {
     path: 'my',
     name: '个人信息',
-    hideInMenu: true,
-    icon: <HomeOutlined />,
+    // hideInMenu: true,
+    icon: <UserOutlined />,
   },
   [ROUTE_KEY.ORG]: {
     path: 'org',
     name: '门店管理',
-    hideInMenu: true,
+    // hideInMenu: true,
     icon: <ShopOutlined />,
   },
   [ROUTE_KEY.COURSE]: {
